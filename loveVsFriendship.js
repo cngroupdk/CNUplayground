@@ -1,7 +1,8 @@
-function wordsToMarks(string){
-    let tmp = 0;
-    for(let i = 0; i < string.length; i++) {
-        tmp += string.charCodeAt(i) - 96;
-    }
-    return tmp;
+const wordsToMarks = (string) => {
+    return [...string].reduce((res, char) => {return res + char.charCodeAt() - 96}, 0);
 }
+
+//note [...string] formats string to char array format
+
+
+console.log(wordsToMarks("love"));
