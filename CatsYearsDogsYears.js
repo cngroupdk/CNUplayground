@@ -1,4 +1,8 @@
-var humanYearsCatYearsDogYears = function(humanYears) {
+const humanYearsCatYearsDogYears = h => {
+  return h === 1 ? [1,15,15] : h === 2 ? [2, 24, 24]: [h, 24 + (h-2)*4, 24 + (h-2)*5];
+}
+
+/* var humanYearsCatYearsDogYears = function(humanYears) {
     let result = [0,0,0];
     
     for(i = 1; i<= humanYears; i++){
@@ -17,5 +21,5 @@ var humanYearsCatYearsDogYears = function(humanYears) {
       }
     }
     return result;
-  }
+  } */
   
