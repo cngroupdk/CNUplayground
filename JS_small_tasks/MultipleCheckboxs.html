@@ -109,14 +109,13 @@
             shiftDown = false;
         })
 
-        checkboxes.map((checkbox, index) => checkbox.addEventListener('change', () => {
+        checkboxes.forEach((checkbox, index) => checkbox.addEventListener('change', () => {
             if (shiftDown) {
                 if (checkboxRange.first || checkboxRange.first === 0) {
                     checkboxRange.last = index;
                 } else {
                     checkboxRange.first = index;
                 }
-                console.log(checkboxRange)
                 checkAllInRange();
             }
         }))
