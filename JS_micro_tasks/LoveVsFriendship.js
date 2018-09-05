@@ -1,9 +1,4 @@
 function wordsToMarks(string){
-    let temp = 0;
-    
-    for(let i of string){
-      temp += i.charCodeAt()-96;
-    }
-    
-    return temp;
-  }
+  return [...string]
+    .reduce(((sum, char) => sum += char.charCodeAt()-96),0);
+}
