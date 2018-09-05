@@ -95,41 +95,41 @@
     </div>
 
     <script>
-        let shiftDown = false;
         const checkboxes = [...document.querySelectorAll("input[type='checkbox']")];
-        const checkboxRange = { first: null, last: null };
+        const checkboxRange = [null, null];
 
-        window.addEventListener('keydown', (e) => {
+        checkboxes.forEach((checkbox, index) => checkbox.addEventListener('click', this.handleCheckBoxClick));
+
+        window.addEventListener('keyup', e => {
             if (e.keyCode === 16) {
-                shiftDown = true;
+                checkboxRange.reverse();
+                checkboxRange[1] = null;
             }
         })
 
-        window.addEventListener('keyup', () => {
-            shiftDown = false;
-        })
+        function handleCheckBoxClick(e) {
+            const index = checkboxes.indexOf(e.target);
 
-        checkboxes.forEach((checkbox, index) => checkbox.addEventListener('change', () => {
-            if (shiftDown) {
-                if (checkboxRange.first || checkboxRange.first === 0) {
-                    checkboxRange.last = index;
+            if (e.shiftKey) {
+                if (checkboxRange[0] || checkboxRange[0] === 0) {
+                    checkboxRange[1] = index;
                 } else {
-                    checkboxRange.first = index;
+                    checkboxRange[0] = index;
                 }
+
                 checkAllInRange();
             }
-        }))
+
+        }
 
         const checkAllInRange = () => {
-            if ((checkboxRange.first || checkboxRange.first === 0) && (checkboxRange.last || checkboxRange.last === 0)) {
-                if (checkboxRange.first > checkboxRange.last) {
-                    const temp = checkboxRange.first;
-                    checkboxRange.first = checkboxRange.last;
-                    checkboxRange.last = temp;
+            if ((checkboxRange[0] || checkboxRange[0] === 0) && (checkboxRange[1] || checkboxRange[1] === 0)) {
+                if (checkboxRange[0] > checkboxRange[1]) {
+                    checkboxRange.reverse();
                 }
 
-                const checked = checkboxes.slice(checkboxRange.first, checkboxRange.last + 1)
-                    .map(checkbox => checkbox.checked = true);
+                checkboxes.slice(checkboxRange[0], checkboxRange[1] + 1)
+                    .forEach(checkbox => checkbox.checked = true);
             }
         }
     </script>
