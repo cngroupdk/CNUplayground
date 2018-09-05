@@ -4,13 +4,13 @@
 <head>
     <meta charset="UTF-8">
     <title>Type Ahead 👀</title>
-    <link rel="stylesheet" href="style.css">
+    <!-- <link rel="stylesheet" href="style.css"> -->
 </head>
 
 <body>
 
     <form class="search-form">
-        <input type="text" class="search" placeholder="City or State" >
+        <input type="text" class="search" placeholder="City or State">
         <ul class="suggestions">
             <li>Filter for a city</li>
             <li>or a state</li>
@@ -24,12 +24,27 @@
             .then(data => cities.push(...data))
             .catch(eror => console.error(eror));
 
-        //console.log(cities)
+        const textBox = document.querySelector('.search');
+        const suggestions = document.querySelector('.suggestions');
+
+        textBox.addEventListener('keyup', () => {
+            renderSuggestion(textBox.value.toLowerCase());
+        })
 
         const filterCities = term => {
-            console.log(term);
             const regex = new RegExp(term, 'g');
-            return cities.filter(i => i.city.match(regex) || i.state.match(regex));
+            return cities.filter(i => i.city.toLowerCase().match(regex) || i.state.toLowerCase().match(regex));
+        }
+
+        const renderSuggestion = term => {
+            suggestions.innerHTML = '';
+
+            if (term) {
+                filterCities(term).map(item => {
+                    suggestions.innerHTML += `<li>${item.city} ${item.state}</li>`;
+                })
+            }
+
         }
 
 
