@@ -40,32 +40,31 @@
   </div>
 
   <script>
+    //query selected dom elements
     const holes = document.querySelectorAll('.hole');
     const scoreBoard = document.querySelector('.score');
     const moles = document.querySelectorAll('.mole');
     const difficulty = document.querySelector('#difficulty');
+
+    // difficulty intervals for the game
     const intervals = {
       "easy": [200, 1000],
       "medium": [150, 750],
       "hard": [100, 500]
     }
 
-
-    const randomTime = (interval) => {
-      return Math.floor(Math.random() * (interval[1] - interval[0]) + interval[0]);
-    }
-
-
+    //game variables
     let lastHole;
     let lastMole;
     let selectedDifficulty = difficulty.options[difficulty.selectedIndex].value;
     let gameState = "not-playing";
     let score;
 
-    console.log(selectedDifficulty);
-
-    console.log(intervals[selectedDifficulty]);
-
+    //random time interval to whack the mole
+    const randomTime = (interval) => {
+      return Math.floor(Math.random() * (interval[1] - interval[0]) + interval[0]);
+    }
+    //selects a random hole to popup mole
     const selectHole = (holes) => {
       const index = Math.floor(Math.random() * holes.length);
       const selectedHole = holes[index];
@@ -76,6 +75,7 @@
       return selectedHole;
     }
 
+    //adds necesary css to show a mole from a hole
     const popupMole = () => {
       const limit = randomTime(intervals[selectedDifficulty]);
       const chosenHole = selectHole(holes);
@@ -92,6 +92,8 @@
       }, limit);
     }
 
+
+    //score handling when whacking a mole, can't click the same mole more times
     const handleMoleClick = (e) => {
       if (lastMole !== e.target) {
         score++;
@@ -100,17 +102,18 @@
       }
     }
 
+    //changes difficulty only when the player haven't started the game yet
     const changeDifficulty = () => {
       if (gameState === "not-playing") {
         selectedDifficulty = difficulty.options[difficulty.selectedIndex].value;
       }
     }
 
-
-
+    //Event listeners
     moles.forEach((mole) => {
       mole.addEventListener('click', handleMoleClick);
     });
+
     difficulty.addEventListener('change', changeDifficulty);
 
     const startGame = () => {
