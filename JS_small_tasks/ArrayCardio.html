@@ -38,13 +38,13 @@
         // Array.prototype.find()
         // Find is like filter, but instead returns just the one you are looking for
         // find the comment with the ID of 823423
-        const getCommentWithId = (comment, id) => comment.id === id;
-        const found = comments.find(comment => getCommentWithId(comment, 823423));
+        const hasCommentGivenId = (comment, id) => comment.id === id;
+        const found = comments.find(comment => hasCommentGivenId(comment, 823423));
         console.log('Found comment', found);
         // Array.prototype.findIndex()
         // Find the comment with this ID
         // delete the comment with the ID of 823423
-        const index = comments.findIndex(comment => getCommentWithId(comment, 823423));
+        const index = comments.findIndex(comment => hasCommentGivenId(comment, 823423));
         console.log('Index of comment is', index);
         const removed = comments.splice(index, 1); // returns array with removed item
         console.log(`Comment with id ${removed[0].id} has been removed.`)
