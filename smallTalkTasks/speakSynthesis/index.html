@@ -1,0 +1,103 @@
+<html>
+
+<head>
+    <title>Speech synthesiser</title>
+    <link href="./style.css" type="text/css" rel="stylesheet">
+
+</head>
+
+<body>
+    <h1>Speech synthesiser</h1>
+
+    <p>Enter some text in the input below and press return to hear it. change voices using the dropdown menu.</p>
+
+    <form>
+        <input type="text" class="txt" id="speechText">
+        <div>
+            <label for="rate">Rate</label><input type="range" min="0.5" max="2" value="1" step="0.001" id="rate">
+            <div class="rate-value">1.000</div>
+            <div class="clearfix"></div>
+        </div>
+        <div>
+            <label for="pitch">Pitch</label><input type="range" min="0" max="2" value="1" step="0.001" id="pitch">
+            <div class="pitch-value">1.000</div>
+            <div class="clearfix"></div>
+        </div>
+        <select id="lang">
+
+        </select>
+
+        <button id="play">Play</button>
+
+        <button id="pause">Pause</button>
+    </form>
+
+</body>
+
+<script>
+    const synth = window.speechSynthesis;
+    let speechUtterance = new SpeechSynthesisUtterance();
+
+    const speechRate = document.querySelector("#rate");
+    const rateValue = document.querySelector('.rate-value');
+    const speechPitch = document.querySelector("#pitch");
+    const pitchValue = document.querySelector('.pitch-value');
+    const speechText = document.querySelector("#speechText");
+    const langSelect = document.querySelector("#lang");
+    const playButton = document.querySelector("#play");
+    const pauseButton = document.querySelector("#pause");
+    let selectedVoice;
+
+    speechUtterance.rate = speechRate.value;
+    speechUtterance.pitch = speechPitch.value;
+
+    let voices = [];
+
+    const addVoices = () => {
+        voices = synth.getVoices();
+        let selectedIndex = langSelect.selectedIndex < 0 ? 0 : langSelect.selectedIndex;
+        langSelect.innerHTML = '';
+        voices.forEach((voice) => {
+            let option = document.createElement('option');
+            option.textContent = `${voice.name} (${voice.lang})`;
+            langSelect.appendChild(option);
+        });
+        langSelect.selectedIndex = selectedIndex;
+        speechUtterance.voice = voices[selectedIndex];
+    }
+
+    addVoices();
+    if (speechSynthesis.onvoiceschanged !== undefined) {
+        speechSynthesis.onvoiceschanged = addVoices;
+    }
+
+    const changePitch = (e) => {
+        speechUtterance.pitch = e.target.value;
+        pitchValue.textContent = e.target.value;
+    }
+    const changeRate = (e) => {
+        speechUtterance.rate = e.target.value;
+        rateValue.textContent = e.target.value;
+    }
+    const changeText = (e) => {
+        speechUtterance.text = e.target.value;
+    }
+
+    langSelect.addEventListener('change', addVoices);
+    speechPitch.addEventListener('input', changePitch);
+    speechRate.addEventListener('input', changeRate);
+    speechText.addEventListener('change', changeText);
+    speechUtterance.onend = () => synth.speak(speechUtterance);
+    playButton.addEventListener('click', (e) => {
+        e.preventDefault();
+        (synth.speaking) ? synth.cancel() : synth.speak(speechUtterance);
+    });
+    pauseButton.addEventListener('click', (e) => {
+        e.preventDefault();
+        synth.pause();
+    });
+
+
+</script>
+
+</html>
