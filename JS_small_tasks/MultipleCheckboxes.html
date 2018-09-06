@@ -96,42 +96,39 @@
 
     <script>
         const checkboxes = [...document.querySelectorAll("input[type='checkbox']")];
-        const checkboxRange = [null, null];
+        const checkboxRange = { first: null, last: null };
 
         checkboxes.forEach((checkbox, index) => checkbox.addEventListener('click', this.handleCheckBoxClick));
-
-        window.addEventListener('keyup', e => {
-            if (e.keyCode === 16) {
-                checkboxRange.reverse();
-                checkboxRange[1] = null;
-            }
-        })
 
         function handleCheckBoxClick(e) {
             const index = checkboxes.indexOf(e.target);
 
-            if (e.shiftKey) {
-                if (checkboxRange[0] || checkboxRange[0] === 0) {
-                    checkboxRange[1] = index;
+            if (!e.shiftKey) {
+                // if shift is not pressed remember the index of checkbox as first
+                checkboxRange.first = index;
+            } else {
+                if (checkboxRange.first !== null) {
+                    checkboxRange.last = index;
                 } else {
-                    checkboxRange[0] = index;
+                    checkboxRange.first = index;
                 }
-
                 checkAllInRange();
             }
-
         }
 
         const checkAllInRange = () => {
-            if ((checkboxRange[0] || checkboxRange[0] === 0) && (checkboxRange[1] || checkboxRange[1] === 0)) {
-                if (checkboxRange[0] > checkboxRange[1]) {
-                    checkboxRange.reverse();
+            let { first, last } = checkboxRange;
+            if (first !== null && last !== null) {
+                if (first > last) {
+                    // swap values
+                    last = [first, first = last][0]
                 }
 
-                checkboxes.slice(checkboxRange[0], checkboxRange[1] + 1)
+                checkboxes.slice(first, last + 1)
                     .forEach(checkbox => checkbox.checked = true);
             }
         }
+
     </script>
 </body>
 
