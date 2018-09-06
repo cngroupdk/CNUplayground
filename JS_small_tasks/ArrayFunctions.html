@@ -60,7 +60,8 @@
 
     // 7. sort Exercise
     // Sort the people alphabetically by last name
-    sortedPeople = people.sort((a, b) => a.split(', ')[0] > b.split(', ')[0] ? 1 : -1);
+    const getLastname = string => string.split(', ')[0].trim();
+    sortedPeople = people.sort((a, b) => getLastname(a) > getLastname(b) ? 1 : -1);
     console.log('People sorted by last name')
     console.log(sortedPeople);
     //console.log(sortedPeople);
