@@ -22,14 +22,25 @@
         words.appendChild(p);
 
         recognition.addEventListener('result', e => {
+
             const transcript = [...e.results]
                 .map(result => result[0])
                 .map(result => result.transcript)
                 .join('');
 
-            console.log(transcript);
+            console.log(transcript)
+            if (e.results[0].isFinal) {
+                p.textContent += ` ${transcript}`;
+                words.appendChild(p);
+            }
+
 
         })
+
+        function displayTranscript(transcript) {
+            // todo
+
+        }
 
         recognition.addEventListener('end', recognition.start);
 
