@@ -98,7 +98,7 @@
         const checkboxes = [...document.querySelectorAll("input[type='checkbox']")];
         const checkboxRange = { first: null, last: null };
 
-        checkboxes.forEach((checkbox, index) => checkbox.addEventListener('click', this.handleCheckBoxClick));
+        checkboxes.forEach((checkbox, index) => checkbox.addEventListener('click', handleCheckBoxClick));
 
         function handleCheckBoxClick(e) {
             const index = checkboxes.indexOf(e.target);
