@@ -1,0 +1,29 @@
+<!doctype html>
+<html>
+
+<head>
+    <title>Boring example</title>
+</head>
+
+<body>
+    <p>Events are typically dispatched by the implementation as a result of a user action, in response to the completion
+        of a task, or to signal progress during asynchronous activity (such as a network request). Some events can be used
+        to control the behavior that the implementation may take next (or undo an action that the implementation already
+        took). Events in this category are said to be cancelable and the behavior they cancel is called their default action.
+        Cancelable event objects can be associated with one or more 'default actions'. To cancel an event, call the preventDefault()
+        method.
+    </p>
+    <script>
+        const p = document.querySelector('p');
+
+        obj.addEventListener("load", imgFetched)
+
+        function imgFetched(ev) {
+            // great success
+        }
+
+        document.addEventListener('mousedown', (e) => e.preventDefault());
+    </script>
+</body>
+
+</html>

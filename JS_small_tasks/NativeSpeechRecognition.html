@@ -17,9 +17,7 @@
         const recognition = new SpeechRecognition();
         recognition.interimResults = true;
 
-        let p = document.createElement('p');
         const words = document.querySelector('.words');
-        words.appendChild(p);
 
         recognition.addEventListener('result', e => {
 
@@ -28,22 +26,14 @@
                 .map(result => result.transcript)
                 .join('');
 
-            console.log(transcript)
             if (e.results[0].isFinal) {
+                let p = document.createElement('p');
                 p.textContent += ` ${transcript}`;
                 words.appendChild(p);
             }
-
-
         })
 
-        function displayTranscript(transcript) {
-            // todo
-
-        }
-
         recognition.addEventListener('end', recognition.start);
-
         recognition.start();
     </script>
 
