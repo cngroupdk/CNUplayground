@@ -100,19 +100,54 @@
 
       // Array.prototype.reduce()
       // 4. How many years did all the inventors live?
-      result = inventors.reduce(
-        (acc, inventor) => acc + inventor.passed - inventor.year,
-        0
-      );
-      console.log("4. How many years did all the inventors live?")
+
+      result = inventors.reduce((acc, inventor) => {
+        acc.push({
+          first: inventor.first,
+          last: inventor.last,
+          lived: inventor.passed - inventor.year
+        });
+
+        return acc;
+      }, new Array());
+      console.log("4. How many years did all the inventors live?");
       console.log(result);
+      console.log("4. How many years did all the inventors live? - combined");
+      console.log(
+        inventors.reduce(
+          (acc, inventor) => acc + inventor.passed - inventor.year,
+          0
+        )
+      );
+
       // 5. Sort the inventors by years lived
+      result = inventors.sort(
+        (inventor1, inventor2) =>
+          inventor1.passed -
+          inventor1.year -
+          (inventor2.passed - inventor2.year)
+      );
+
+      console.log("5. Sort the inventors by years lived");
+      console.log(result);
 
       // 6. create a list of Boulevards in Paris that contain 'de' anywhere in the name
       // https://en.wikipedia.org/wiki/Category:Boulevards_in_Paris
 
       // 7. sort Exercise
       // Sort the people alphabetically by last name
+      result = people.sort((person1, person2) => {
+        if (person1 < person2) {
+          return -1;
+        }
+        if (person1 > person2) {
+          return 1;
+        }
+        return 0;
+      });
+
+      console.log("7. Sort the people alphabetically by last name");
+      console.log(result);
 
       // 8. Reduce Exercise
       // Sum up the instances of each of these
@@ -132,6 +167,26 @@
         "car",
         "truck"
       ];
+
+      result = data.reduce((acc, item) => {
+        var a = acc.find(a => {
+          return a.item === item;
+        });
+
+        if (a) {
+          a.count += 1;
+        } else {
+          acc.push({
+            item: item,
+            count: 1
+          });
+        }
+
+        return acc;
+      }, new Array());
+
+      console.log("8. Sum up the instances of each of these");
+      console.log(result);
     </script>
   </body>
 </html>
