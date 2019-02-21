@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Type Ahead 👀</title>
+</head>
+<body>
+  <form class="search-form" onkeypress="return event.keyCode != 13;">
+    <input type="text" class="search" placeholder="City or State">
+    <input type="button" value="Filter" onclick="filter()">
+    <ul class="suggestions">
+      <li>Filter for a city</li>
+      <li>or a state</li>
+    </ul>
+    <div class="filteredCities">
+    </div>
+  </form>
+<script>
+  const endpoint = 'https://gist.githubusercontent.com/Miserlou/c5cd8364bf9b2420bb29/raw/2bf258763cdddd704f8ffd3ea9a3e81d25e2c6f6/cities.json';
+  const filter = () => {
+    return new Promise((resolve, reject) => {
+      return fetch(endpoint)
+        .then(res => res.json())
+        .then(cities => {
+          const text = document.querySelector('.search').value.toUpperCase()
+          const filtered = cities.filter(a => a.state.toUpperCase().includes(text) || a.city.toUpperCase().includes(text))
+          let str = '<p>Filtered cities: </p>'
+          filtered.forEach(e => {
+            str += '<li>' + 'City: ' + e.city + ', State: ' + e.state + ', Rank: ' + e.rank + '</li>' 
+          })
+          document.querySelector('.filteredCities').innerHTML = filtered.length > 0 ?  str : '<p> No item found </p>'
+          document.querySelector('.search').value = ''
+          resolve(false)
+        })
+        .catch(err => { 
+          reject(err)
+          throw err 
+        })
+      })
+  }
+</script>
+</body>
+</html>

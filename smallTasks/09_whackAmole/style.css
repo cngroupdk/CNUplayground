@@ -1,0 +1,64 @@
+body {
+  width: 50%;
+  align-content: center;
+  margin: auto;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+h1 {  
+  text-align:  center;
+}
+
+.info {
+  clear: both
+}
+
+.score {
+  font-size: 2rem;
+  float: right;
+  padding-top: 10px;
+  margin-right: -45px;
+}
+
+button {
+  width: auto;
+  font: 2em sans-serif;
+  background-color:  rgb(168, 192, 235);
+  float: left;
+}
+
+.game {
+  width: 100%;
+  height: auto;
+  margin-top: 5em;
+  background-color: yellow;
+  padding: 20px;
+  display: flex;
+  
+}
+
+.circle {
+	border: 3px solid CornflowerBlue;
+	border-radius: 5px;
+}
+
+.hole > img {
+  content: url(dirt.svg);
+  display: flex;
+  width: 75%;
+  margin-left: 10px;
+  margin-top: -10px  
+}
+
+.mole > img {
+  content: url(mole.svg);
+  display: flex;
+  width: 50%;
+  margin-left: 15px;
+  visibility: hidden;  
+}
+
+
+
+
+
