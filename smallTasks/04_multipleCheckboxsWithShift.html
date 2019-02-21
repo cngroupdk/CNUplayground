@@ -90,7 +90,7 @@
   let lastIndexes = []
   let lastChecked = false
   const elements = document.querySelectorAll('.item')
-  elements.forEach(a => a.addEventListener('click', (e) => {
+  elements.forEach((a, index) => a.addEventListener('click', (e) => {
     lastIndexes.push(index)
     lastChecked = a.querySelector('input').checked ? true : false
   }))
@@ -105,6 +105,7 @@
               item.checked = lastChecked ? true : false
             }            
           })
+          event.preventDefault()
           return event.stopImmediatePropagation() // check changes not propagated when still holding shift !?!?!
         } 
       }      
