@@ -93,23 +93,20 @@
   elements.forEach((a, index) => a.addEventListener('click', (e) => {
     lastIndexes.push(index)
     lastChecked = a.querySelector('input').checked ? true : false
-  }))
 
-  document.querySelector('.inbox').addEventListener('keyup', (e) => {
-    if(e.key === 'Shift') {     
-        if(lastIndexes.length > 1) {
-          const indexesToCheck = [ lastIndexes[lastIndexes.length - 2], lastIndexes[lastIndexes.length - 1] ].sort((a, b) => a - b)
-          elements.forEach((el, i) => {
-            if((indexesToCheck[0] <= i) && (indexesToCheck[1] >= i)) {
-              const item = el.querySelector('input')
-              item.checked = lastChecked ? true : false
-            }            
-          })
-          event.preventDefault()
-          return event.stopImmediatePropagation() // check changes not propagated when still holding shift !?!?!
-        } 
-      }      
-    })
+    if(e.shiftKey) {
+      if(lastIndexes.length > 1) {
+        const indexesToCheck = [ lastIndexes[lastIndexes.length - 2], lastIndexes[lastIndexes.length - 1] ].sort((a, b) => a - b)
+        elements.forEach((el, i) => {
+          if((indexesToCheck[0] <= i) && (indexesToCheck[1] >= i)) {
+            const item = el.querySelector('input')
+            item.checked = lastChecked ? true : false
+          }            
+        })
+      }
+    }
+
+  }))
 </script>
 </body>
 </html>
