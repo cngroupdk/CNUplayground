@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Type Ahead 👀</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <form class="search-form">
+      <input type="text" class="search" placeholder="City or State" />
+      <ul class="suggestions">
+        <li>Filter for a city</li>
+        <li>or a state</li>
+      </ul>
+    </form>
+    <script>
+      const endpoint =
+        "https://gist.githubusercontent.com/Miserlou/c5cd8364bf9b2420bb29/raw/2bf258763cdddd704f8ffd3ea9a3e81d25e2c6f6/cities.json";
+
+      const data = [];
+
+      fetch(endpoint)
+        .then(response => response.json())
+        .then(json => {
+          data.push(...json);
+        });
+      const searchInput = document.querySelector(".search");
+      const suggestions = document.querySelector(".suggestions");
+      searchInput.addEventListener("keyup", handleChange);
+
+      function handleChange() {
+        const searchValue = this.value.toLowerCase();
+        suggestions.innerHTML = "";
+
+        data
+          .filter(city => {
+            return (
+              city.city.toLowerCase().match(searchValue) ||
+              city.state.toLowerCase().match(searchValue)
+            );
+          })
+          .map(sugg => {
+            var newEl = document.createElement("li");
+            newEl.innerHTML = "City: " + sugg.city + ", State: " + sugg.state;
+            suggestions.appendChild(newEl);
+          });
+      }
+    </script>
+  </body>
+</html>
