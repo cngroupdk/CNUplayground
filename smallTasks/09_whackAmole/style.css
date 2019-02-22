@@ -10,36 +10,39 @@ h1 {
 }
 
 .info {
-  clear: both
-}
-
-.score {
-  font-size: 2rem;
-  float: right;
-  padding-top: 10px;
-  margin-right: -45px;
-}
-
-button {
-  width: auto;
-  font: 2em sans-serif;
-  background-color:  rgb(168, 192, 235);
-  float: left;
-}
-
-.game {
+  clear: both;
   width: 100%;
-  height: auto;
-  margin-top: 5em;
+  border: 3px solid CornflowerBlue;
   background-color: yellow;
-  padding: 20px;
-  display: flex;
-  
+  border-radius: 5px;
+  height: 2.05rem;
 }
 
 .circle {
+  width: 100%;
+  height: 120px;
+  margin-top: 5%;
 	border: 3px solid CornflowerBlue;
 	border-radius: 5px;
+}
+
+.time {
+  font-size: 1.5rem;
+  padding-bottom: 40px;
+  margin-left: 5px;
+}
+
+.score {
+  font-size: 1.5rem;
+  float: right;
+  margin-right: 5px;
+}
+
+.game {
+  width: fit-content;
+  background-color: yellow;
+  padding: 5px;
+  display: flex;
 }
 
 .hole > img {
@@ -47,7 +50,8 @@ button {
   display: flex;
   width: 75%;
   margin-left: 10px;
-  margin-top: -10px  
+  margin-top: -10px;
+  visibility: visible; 
 }
 
 .mole > img {
@@ -55,9 +59,28 @@ button {
   display: flex;
   width: 50%;
   margin-left: 15px;
+  padding-top: 20px;
   visibility: hidden;  
 }
 
+.gameOver {
+  width: 100%;
+  font-size: 2rem;
+  color: red;
+  visibility: collapse;
+  margin-left: 5%;
+  margin-bottom: 50%;
+}
+
+button {
+  width: auto;
+  height: fit-content;
+  font: 1.5em sans-serif;
+  background-color:  green;
+  margin-top: 18%;
+  float: left;
+  margin-left: 40%;
+}
 
 
 
