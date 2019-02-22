@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Whack A Mole!</title>
+    <link
+      href="https://fonts.googleapis.com/css?family=Amatic+SC:400,700"
+      rel="stylesheet"
+      type="text/css"
+    />
+    <link rel="stylesheet" href="style-09.css" />
+  </head>
+  <body>
+    <h1>Whack-a-mole! <span class="score">0</span></h1>
+    <h2 id="gameOver"></h2>
+    <button onClick="startGame()">Start!</button>
+
+    <div class="game">
+      <div class="hole hole1">
+        <div class="mole"></div>
+      </div>
+      <div class="hole hole2">
+        <div class="mole"></div>
+      </div>
+      <div class="hole hole3">
+        <div class="mole"></div>
+      </div>
+      <div class="hole hole4">
+        <div class="mole"></div>
+      </div>
+      <div class="hole hole5">
+        <div class="mole"></div>
+      </div>
+      <div class="hole hole6">
+        <div class="mole"></div>
+      </div>
+    </div>
+
+    <script>
+      const holes = document.querySelectorAll(".hole");
+      const scoreBoard = document.querySelector(".score");
+      const moles = [...document.querySelectorAll(".mole")];
+      const gameOver = document.getElementById("gameOver");
+      let endGame = false;
+      let prevHoleIndex = -1;
+      let score = 0;
+
+      moles.map(mole =>
+        mole.addEventListener("click", event => {
+          score++;
+          scoreBoard.innerHTML = score;
+        })
+      );
+
+      const getRandomTime = () => {
+        return Math.floor(Math.random() * 500 + 250);
+      };
+
+      const getRandomHole = holes => {
+        const index = Math.floor(Math.random() * holes.length);
+        console.log(index, prevHoleIndex);
+        return index != prevHoleIndex ? holes[index] : getRandomHole();
+      };
+
+      const showMole = () => {
+        const time = getRandomTime();
+        const hole = getRandomHole(holes);
+
+        hole.classList.add("up");
+        setTimeout(() => {
+          hole.classList.remove("up");
+          if (!endGame) {
+            showMole();
+          } else {
+            gameOver.innerHTML = "GAME OVER";
+          }
+        }, time);
+      };
+
+      function startGame() {
+        gameOver.innerHTML = "";
+        endGame = false;
+        score = 0;
+        showMole();
+        setTimeout(() => (endGame = true), 10000);
+      }
+    </script>
+  </body>
+</html>
