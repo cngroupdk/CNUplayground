@@ -9,12 +9,25 @@
   <div class="words" contenteditable>
   </div>
 
-<script>
-  window.SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition
-  const recognition = new SpeechRecognition()
-  
-</script>
+  <script>
+    
+    window.SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition
+    
+    const recognition = new SpeechRecognition()
+    recognition.lang = 'en-US'
+    recognition.interimResults = false
+    recognition.maxAlternatives = 1
 
+    recognition.start()
+
+    recognition.addEventListener( 'end',() => recognition.start())
+
+    recognition.onresult = (event) => {
+      const result = event.results[0][0].transcript
+      document.querySelector('.words').innerHTML += '<p>' + result + '</p>'
+    }
+
+  </script>
 
   <style>
     html {
