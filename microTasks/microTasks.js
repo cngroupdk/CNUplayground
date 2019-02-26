@@ -28,13 +28,16 @@ const maps = (x) => x.map(el => el * 2)
 
 //* [CW 04 - Multiple of index](https://www.codewars.com/kata/multiple-of-index)
 const multipleOfIndex = (array) => {
-  const arr = []
-  return array.map((el, index) => {
-    if(Number.isInteger(el / index)) {
+  return array.filter((el, index) => {
+    const res = el / index 
+    if (res === 0) {
+      // hack as array.filter does not return 0 as it is falsy
+      return true
+    }
+    if(Number.isInteger(res)) {
       return el
     }
   })
-  return arr
 }
 
 //* [CW 05 - Reduce but grow](http://www.codewars.com/kata/beginner-reduce-but-grow)
