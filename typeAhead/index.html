@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Type Ahead 👀</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <form class="search-form">
+      <input
+        type="text"
+        class="search"
+        onkeyup="filter()"
+        placeholder="City or State"
+      />
+      <ul class="suggestions">
+        <li>Filter for a city</li>
+        <li>or a state</li>
+      </ul>
+    </form>
+    <script>
+      const endpoint =
+        "https://gist.githubusercontent.com/Miserlou/c5cd8364bf9b2420bb29/raw/2bf258763cdddd704f8ffd3ea9a3e81d25e2c6f6/cities.json";
+
+      function filter() {
+        fetch(endpoint)
+          .then(function(response) {
+            return response.json();
+          })
+          .then(function(json) {
+            const statesAndCities = json;
+            const txtValue = document
+              .querySelector(".search")
+              .value.toUpperCase();
+            const result = statesAndCities.filter(
+              country =>
+                country.state.toUpperCase().includes(txtValue) ||
+                +country.city.toUpperCase().includes(txtValue)
+            );
+
+            let ul = document.querySelector(".suggestions");
+
+            (ul.innerHTML = ""),
+              result.forEach(function(a) {
+                let li = document.createElement("li");
+                let liContent = document.createTextNode(
+                  a.city + " : " + a.state
+                );
+                li.appendChild(liContent);
+                ul.appendChild(li);
+              });
+            console.log(result);
+          })
+          .catch(function(err) {
+            console.log("Fetch problem: " + err.message);
+          });
+        console.log("here are filtered data");
+      }
+    </script>
+  </body>
+</html>
