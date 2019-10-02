@@ -9,17 +9,11 @@ var humanYearsCatYearsDogYears = function(humanYears) {
             catYears += 9
             dogYears += 9
             if(humanYears >= 3){
-                const additionalYears = humanYears - 2
-                catYears += additionalYears * 4
-                dogYears += additionalYears * 5 
+                catYears += (humanYears - 2) * 4
+                dogYears += (humanYears - 2) * 5 
             }
-            else null;
         }
-    else null;
     }
-    else null;
     
     return [humanYears,catYears,dogYears];
   }
-
-  console.log(humanYearsCatYearsDogYears)
