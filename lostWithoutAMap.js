@@ -1,1 +1,1 @@
-const maps = (x) => x.map(x => x * 2)
+const maps = array => array.map(x => x * 2)

@@ -4,4 +4,4 @@ function wordsToMarks(string) {
 }
 
 //Inline
-const wordsToMarks = (string) => Array.prototype.map.call(string, char => char.toLowerCase().charCodeAt(0) - 96).reduce((a, b) => a + b, 0)
+const wordsToMarks = string => Array.prototype.map.call(string, char => char.toLowerCase().charCodeAt(0) - 96).reduce((a, b) => a + b, 0)

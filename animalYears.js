@@ -1,4 +1,4 @@
-const humanYearsCatYearsDogYears = (humanYears) => {
+const humanYearsCatYearsDogYears = humanYears => {
     let cat
     let dog
     switch (humanYears) {

@@ -1,1 +1,1 @@
-const multipleOfIndex = (array) => array.filter((el, i) => el % i == 0)
+const multipleOfIndex = array => array.filter((el, i) => el % i == 0)
