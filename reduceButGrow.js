@@ -1,0 +1,1 @@
+const grow = (array) => array.reduce((a,b) => a*b,1)
