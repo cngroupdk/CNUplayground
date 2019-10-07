@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Type Ahead 👀</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <form class="search-form">
+    <input type="text" class="search" placeholder="City or State">
+    <ul class="suggestions">
+      <li>Filter for a city</li>
+      <li>or a state</li>
+    </ul>
+  </form>
+<script>
+const endpoint = 'https://gist.githubusercontent.com/Miserlou/c5cd8364bf9b2420bb29/raw/2bf258763cdddd704f8ffd3ea9a3e81d25e2c6f6/cities.json';
+
+// GET YOUR DATA FIRST, THEN DO THE HTML
+const cities = [];
+
+fetch(endpoint) // fetch itself just return a promise
+  .then(blob => blob.json()) // this "then" returns a blob of data, to convert the raw data into JSON we ude a method "json()" which creates another promise
+  .then(data => cities.push(...data)) // we get the data and push them into our constant, we use spread so that we do not have nested arrays
+
+function findMatches(wordToMatch, cities){
+  return cities.filter(place => {
+    // does city or state match the input
+    const regex = new RegExp(wordToMatch, 'gi');
+    return place.city.match(regex) || place.state.match(regex);
+
+  })
+}
+
+function displayMatches(){
+  const matchArray = findMatches(this.value, cities);
+  const html = matchArray.map(place => {
+    const regex = new RegExp(this.value, 'gi');
+    const cityName = place.city.replace(regex, `<span class="h1"> ${this.value} </span>`); // like place.city but includes the html
+    const stateName = place.state.replace(regex, `<span class="h1"> ${this.value} </span>`);
+
+    return `
+      <li>
+        <span class="name">${cityName}, ${stateName}</span>
+        <span class="population">${place.population}</span>
+      </li>
+    `
+  }).join('')
+  suggestions.innerHTML = html;
+}
+
+const searchInput = document.querySelector('.search');
+const suggestions = document.querySelector('.suggestions');
+
+searchInput.addEventListener('change', displayMatches); // listen for the change event
+searchInput.addEventListener('keyup', displayMatches); // for every letter typed in
+
+
+
+</script>
+</body>
+</html>
