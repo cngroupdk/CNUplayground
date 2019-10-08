@@ -45,7 +45,7 @@
 
     // Array.prototype.reduce()
     // 4. How many years did all the inventors live?
-    const lifeSpanReducer = (totalLifeSpan, inventor) => totalLifeSpan + inventor.passed - inventor.year
+    const lifeSpanReducer = (totalLifeSpan, inventor) => totalLifeSpan + inventor.passed - inventor.year // inventor age could be separate variable
     const totalYearsLived = inventors.reduce(lifeSpanReducer, 0)
 
     // 5. Sort the inventors by years lived

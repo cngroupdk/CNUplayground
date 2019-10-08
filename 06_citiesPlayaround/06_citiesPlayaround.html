@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Type Ahead 👀</title>
+    <link rel="stylesheet" href="06_style.css">
+</head>
+
+<body>
+    <form class="search-form">
+        <input id="locationSearch" type="text" class="search" placeholder="City or State">
+        <ul class="suggestions">
+            <li>Filter for a city</li>
+            <li>or a state</li>
+        </ul>
+    </form>
+    <script>
+        const endpoint = 'https://gist.githubusercontent.com/Miserlou/c5cd8364bf9b2420bb29/raw/2bf258763cdddd704f8ffd3ea9a3e81d25e2c6f6/cities.json';
+        const cities = []
+        let matches = []
+        const searchInput = document.querySelector(".search")
+        searchInput.addEventListener("keyup", displayMatches)
+
+        fetch(endpoint)
+            .then(response => response.json())
+            .then(data => cities.push(...data))
+
+        const findMatches = (searchPhrase, cities) => {
+            const matches = []
+            const regex = new RegExp(searchPhrase, 'gi');
+            cities.forEach(location => {
+                if (location.city.match(regex) || location.state.match(regex)) {
+                    matches.push(location)
+                }
+            })
+            return matches
+        }
+
+        function displayMatches() {
+            //console.log(this);
+            const matches = findMatches(this.value, cities)
+            const list = document.querySelector('.suggestions')
+            const regex = new RegExp(this.value, 'gi')
+            const html = matches.map((location) => {
+                const cityName = location.city.replace(regex, `<span class="hl">${this.value}</span>`)
+                const stateName = location.state.replace(regex, `<span class="hl">${this.value}</span>`)
+                return `
+                <li>
+                    <span class="class="name">${cityName}, ${stateName}</span>
+                    <span class="population">${location.population}</span>
+                </li>
+                `
+            }).join('')
+            list.innerHTML = html
+        }
+    </script>
+</body>
+</html>
