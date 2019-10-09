@@ -18,7 +18,7 @@
     <script>
         const endpoint = 'https://gist.githubusercontent.com/Miserlou/c5cd8364bf9b2420bb29/raw/2bf258763cdddd704f8ffd3ea9a3e81d25e2c6f6/cities.json';
         const cities = []
-        let matches = []
+        const matches = []
         const searchInput = document.querySelector(".search")
         searchInput.addEventListener("keyup", displayMatches)
 
@@ -40,9 +40,9 @@
         function displayMatches() {
             //console.log(this);
             const matches = findMatches(this.value, cities)
-            const list = document.querySelector('.suggestions')
+            const listOfResults = document.querySelector('.suggestions')
             const regex = new RegExp(this.value, 'gi')
-            const html = matches.map((location) => {
+            const htmlMatches = matches.map((location) => {
                 const cityName = location.city.replace(regex, `<span class="hl">${this.value}</span>`)
                 const stateName = location.state.replace(regex, `<span class="hl">${this.value}</span>`)
                 return `
@@ -52,7 +52,7 @@
                 </li>
                 `
             }).join('')
-            list.innerHTML = html
+            listOfResults.innerHTML = htmlMatches
         }
     </script>
 </body>
