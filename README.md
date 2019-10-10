@@ -35,6 +35,8 @@ As a first step create you branch under this repository. Then upload the solutio
 
 Goal is to go through training excercises for screeps game. Then launch simulation room and try to do the tasks listed below.
 
+Please note that simulation mode is not persisting state between tab reloads / closing. It will persist code, but the simulation progress will be deleted. Keep the tab open :) Also please make screenshots when you achieve the goals, so we avoid any accidents :) 
+
 [Scrreps main page](https://screeps.com/)
 [Tutorial + simaltion room](https://screeps.com/a/#!/sim)
 [Documentation](https://docs.screeps.com/)
