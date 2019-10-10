@@ -30,3 +30,19 @@ As a first step create you branch under this repository. Then upload the solutio
 * [JS30 20 - native speech recognition](https://github.com/wesbos/JavaScript30/blob/master/20%20-%20Speech%20Detection/index-START.html)
 * [JS30 23 - Speech sysnthesis](https://github.com/wesbos/JavaScript30/blob/master/23%20-%20Speech%20Synthesis/index-START.html)
 * [JS30 30 - Whack a mole](https://github.com/wesbos/JavaScript30/blob/master/30%20-%20Whack%20A%20Mole/index-START.html)
+
+## Screeps
+
+Goal is to go through training excercises for screeps game. Then launch simulation room and try to do the tasks listed below.
+
+[Scrreps main page](https://screeps.com/)
+[Tutorial + simaltion room](https://screeps.com/a/#!/sim)
+[Documentation](https://docs.screeps.com/)
+[API reference](https://docs.screeps.com/api/)
+
+* Build a screep using 500 energy
+* Make a use of container
+* Optimize usage of resources and screeps - minimum iddle times and waiting lines
+* Build a road to bottom right resource
+* Optimize building algorithm - build closest
+* Defeat the spawned invader in bottom left corner
