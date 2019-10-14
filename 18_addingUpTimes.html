@@ -191,7 +191,7 @@
         const stringTimes = Array.from(timeNodes).map(node => node.dataset.time)
         const timesInSeconds = stringTimes.map(time => {
             const [minutes, seconds] = time.split(':').map(parseFloat) //string -> number
-            return minutes * 60 + seconds
+            return minutes * SECONDS_PER_MINUTE + seconds
         })
 
         const totalLengthInSeconds = timesInSeconds.reduce((total, time) => time + total, 0)
@@ -200,7 +200,6 @@
         const minutes = Math.floor((totalLengthInSeconds % SECONDS_PER_HOUR) / SECONDS_PER_MINUTE)
         const seconds = (totalLengthInSeconds % SECONDS_PER_HOUR) % SECONDS_PER_MINUTE
         console.log(`The total length is ${hours}:${minutes}:${seconds}`)
-
     </script>
 </body>
 
