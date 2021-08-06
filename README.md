@@ -31,6 +31,18 @@ As a first step create you branch under this repository. Then upload the solutio
 * [JS30 23 - Speech sysnthesis](https://github.com/wesbos/JavaScript30/blob/master/23%20-%20Speech%20Synthesis/index-START.html)
 * [JS30 30 - Whack a mole](https://github.com/wesbos/JavaScript30/blob/master/30%20-%20Whack%20A%20Mole/index-START.html)
 
+## Javascript reading 
+Extra reading for getting deeper into javascript topics, maybe as a extra task if they will be fast or proactive. 
+**Call Stack and event loop**
+https://github.com/leonardomso/33-js-concepts#1-call-stack
+https://github.com/leonardomso/33-js-concepts#9-message-queue-and-event-loop
+**Value types and reference types**
+https://github.com/leonardomso/33-js-concepts#3-value-types-and-reference-types
+**Function scope and closures**
+https://github.com/getify/You-Dont-Know-JS/blob/2nd-ed/scope-closures/README.md
+**pure functions**
+https://github.com/getify/Functional-Light-JS/blob/master/manuscript/ch2.md/#chapter-2-the-nature-of-functions
+
 ## Screeps
 
 Goal is to go through training excercises for screeps game. Then launch simulation room and try to do the tasks listed below.
